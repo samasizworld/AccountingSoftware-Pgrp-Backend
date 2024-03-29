@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "./build",
+    "module": "commonjs", // imp
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "target": "ES6",
+    "noImplicitAny": false,
+    "resolveJsonModule": true
+  }
+}

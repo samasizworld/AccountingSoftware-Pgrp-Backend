@@ -1,0 +1,65 @@
+{
+    "version": "2.4",
+    "services": {
+        "userapi": {
+            "build": {
+                "context": "~/Desktop/PgrpServer/user-api/"
+            },
+            "networks": [
+                "default"
+            ],
+            "ports": [
+                "3000:3000"
+            ],
+            "container_name": "p-userapi",
+            "image": "userimage",
+            "restart": "unless-stopped",
+            "volumes": [
+                "data:/usr/data"
+            ]
+        },
+        "accountapi": {
+            "build": {
+                "context": "~/Desktop/PgrpServer/account-api/"
+            },
+            "networks": [
+                "default"
+            ],
+            "ports": [
+                "4000:4000"
+            ],
+            "container_name": "p-accountapi",
+            "image": "accountimage",
+            "restart": "unless-stopped",
+            "volumes": [
+                "data:/usr/data"
+            ]
+        },
+        "credentialapi": {
+            "build": {
+                "context": "~/Desktop/PgrpServer/credential-api/"
+            },
+            "networks": [
+                "default"
+            ],
+            "ports": [
+                "5000:5000"
+            ],
+            "container_name": "p-credentialapi",
+            "image": "credentialimage",
+            "restart": "unless-stopped",
+            "volumes": [
+                "data:/usr/data"
+            ]
+        }
+    },
+    "volumes": {
+        "data": {}
+    },
+    "networks": {
+        "default": {
+            "external": true,
+            "name": "pnetwork"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+insert into account.ledgerheads (name) values('Aashish Pudasaini'),('Muskan Phuyal');

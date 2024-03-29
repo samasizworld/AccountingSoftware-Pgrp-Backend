@@ -1,0 +1,74 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div style="text-align: center;">Profit And Loss Account</div>
+  <table class="table">
+
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">S.N.</th>
+        <th scope="col">Income(Cr)</th>
+        <th scope="col">Amount(Rs)</th>
+        <th scope="col">Expense(Dr)</th>
+        <th scope="col">Amount(Rs)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+      {{#each Data as |item i|}}
+      <tr>
+        <th scope="row">{{asc i}}</th>
+        {{#if IsIncome}}
+        <td>To {{LedgerName}}</td>
+        <td>{{Amount}}</td>
+        <td></td>
+        <td></td>
+        {{/if}}
+        {{#if IsExpense}}
+        <td></td>
+        <td></td>
+        <td>By {{LedgerName}}</td>
+        <td>{{Amount}}</td>
+      </tr>
+      {{/if}}
+      <tr>
+        {{/each}}
+        {{/each}}
+        <th scope="row"></th>
+        {{#if NetProfit}}
+        <td>NetProfit</td>
+        <td>{{NetProfit}}</td>
+        {{/if}}
+        {{#if NetLoss}}
+        <td>NetLoss</td>
+        <td>{{NetLoss}}</td>
+        {{/if}}
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">Total</th>
+        <td></td>
+        <td>{{Liability}}</td>
+        <td></td>
+        <td>{{Asset}}</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+
+  <div style="display: flex; justify-content:space-between">
+    <p style="margin:  3px;">Approved By</p>
+    <p style="margin: 3px;">Created By</p>
+  </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+account-api/build
+account-api/node_modules
+account-api/package-lock.json
+account-api/pggroup
+
+credential-api/build
+credential-api/node_modules
+credential-api/package-lock.json
+
+user-api/build
+user-api/node_modules
+user-api/package-lock.json
+user-api/pggroup

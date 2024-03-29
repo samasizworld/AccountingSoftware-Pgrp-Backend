@@ -1,0 +1,48 @@
+<html>
+<head>    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   <div>Ledger of Mr {{LedgerName}}</div>
+   <div>Created at {{DateCreated}}</div>
+    <table class="table" >
+        
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">S.N.</th>
+            <th scope="col">DateCreated</th>
+            <th scope="col">Description</th>
+            <th scope="col">Debit</th>
+            <th scope="col">Credit</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each Transactions as |item i|}}
+          <tr>
+            <th scope="row">{{asc i}}</th>
+            <td>{{DateCreated}}</td>
+            <td>{{LedgerName}}</td>
+            <td>{{IsDebit}}</td>
+            <td>{{IsCredit}}</td>
+          </tr>
+          {{/each}}
+          <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td>Amount {{debitBalance}} Dr</td>
+            <td>Amount {{creditBalance}} Cr</td>
+        </tr>
+          {{!-- <tr>
+            <th scope="row">Total</th>
+            <td></td>
+            <td></td>
+            <td>{{Dr}}</td>
+            <td>{{Cr}}</td>
+        </tr> --}}
+        </tbody>
+      </table>
+      
+      
+</body>
+</html>

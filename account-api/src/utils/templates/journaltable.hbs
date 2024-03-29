@@ -1,0 +1,66 @@
+<html>
+<head>    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   <div style="text-align: center;">JournalEntries of PGROUP</div>
+    <table class="table" >
+        
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">S.N.</th>
+            <th scope="col">DateCreated</th>
+            <th scope="col">LedgerHead</th>
+            <th scope="col">LF</th>
+            <th scope="col">Debit</th>
+            <th scope="col">Credit</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each dtos as |item i|}}
+          <tr>
+            <th scope="row">{{asc i}}</th>
+            <td>{{DateCreated}}</td>
+            {{#if IsDebit}}
+            <td>{{LedgerName}}    Dr</td>
+            {{/if}}
+             {{#if IsCredit}}
+            <td>To    {{LedgerName}}
+              {{#if Description}}
+              </br>
+              ({{Description}})
+              {{/if}}
+            </td>
+            {{/if}}
+            <td></td>
+            <td>{{IsDebit}}</td>
+            <td>{{IsCredit}}</td>
+          </tr>
+          {{/each}}
+          <tr>
+            <th scope="row">Total</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{Dr}}</td>
+            <td>{{Cr}}</td>
+        </tr>
+         <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Difference Debit-Credit:({{Diff}})</td>
+        </tr>
+       
+        
+        </tbody>
+      </table>
+
+      <div style="display: flex; justify-content:space-between"> <p style="margin:  3px;">Approved By</p>
+      <p style="margin: 3px;">Created By</p></div>
+     
+      
+      
+</body>
+</html>

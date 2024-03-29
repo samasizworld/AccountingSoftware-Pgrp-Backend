@@ -1,0 +1,728 @@
+{
+	"info": {
+		"_postman_id": "aeee3f23-ad6c-4842-a09e-a293b592faa5",
+		"name": "Pgrp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Upsert Users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJhOWQxNDAxMi02ZTkzLTQ3YTQtOGQ5Zi00OGM1Mjg0NzAyYmIiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserId\": \"\",\r\n    \"FirstName\": \"Santosh\",\r\n    \"LastName\": \"Pudasaini\",\r\n    \"EmailAddress\": \"santosh.pudasaini@gmail.com\",\r\n    \"PhoneNumber\": \"9841368243\",\r\n    \"Address\": \"Indrayani\",\r\n    \"Password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upsert User Role",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Message\": \"Hello this is Test Msg from PGROUP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/User/SMS",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"User",
+								"SMS"
+							],
+							"query": [
+								{
+									"key": "users",
+									"value": "9cadfe00-ed06-4a50-9591-7be695bfaac8,64521d5e-957c-4c7f-99e1-37d3f1f3cf16",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upsert User Role Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserRoleId\": \"36945061-b66e-4963-81d4-8d04c69a5c21\",\r\n    \"UserId\": \"f942e584-927c-4e52-9b5b-18e9b5632bb0\",\r\n    \"IsSystemAdmin\": \"false\",\r\n    \"Name\":\"normaluser\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Upsert/UserRole",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Upsert",
+								"UserRole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJhOWQxNDAxMi02ZTkzLTQ3YTQtOGQ5Zi00OGM1Mjg0NzAyYmIiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"User"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Aashish",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJhOWQxNDAxMi02ZTkzLTQ3YTQtOGQ5Zi00OGM1Mjg0NzAyYmIiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/User/64521d5e-957c-4c7f-99e1-37d3f1f3cf16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"User",
+								"64521d5e-957c-4c7f-99e1-37d3f1f3cf16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "Authenticate Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Token\": \"eyJVc2VyTG9naW5JbmZvSWQiOiJhOWQxNDAxMi02ZTkzLTQ3YTQtOGQ5Zi00OGM1Mjg0NzAyYmIiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Authorize",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Authorize"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"viasizbro99@gmail.com\",\r\n    \"Password\": \"aashish1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorize Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Token\": \"eyJVc2VyTG9naW5JbmZvSWQiOiJhOWQxNDAxMi02ZTkzLTQ3YTQtOGQ5Zi00OGM1Mjg0NzAyYmIiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0=\",\r\n    \"Path\": \"/Users\",\r\n    \"Method\": \"GET\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Authorize",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Authorize"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "entries",
+			"item": [
+				{
+					"name": "http://localhost:4000/JournalEntries/Upsert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "xlsx",
+									"type": "file",
+									"src": "/C:/Users/user/Desktop/Pgrp Server/pggroup_name list.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/JournalEntries/Files",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"JournalEntries",
+								"Files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/JournalEntries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							},
+							{
+								"key": "X-File",
+								"value": "fileresponse",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/JournalEntries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"JournalEntries"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2021-07-01",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "2021-07-30",
+									"disabled": true
+								},
+								{
+									"key": "emails",
+									"value": "viasizbro99@gmail.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LedgerHeadTypes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							},
+							{
+								"key": "X-File",
+								"value": "fileresponse",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/LedgerTypes?search=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"LedgerTypes"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2021-07-01",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "2021-07-30",
+									"disabled": true
+								},
+								{
+									"key": "emails",
+									"value": "viasizbro99@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Trial Balance",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							},
+							{
+								"key": "X-File",
+								"value": "fileresponse",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/TrialBalance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"TrialBalance"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2021-07-01",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "2021-07-30",
+									"disabled": true
+								},
+								{
+									"key": "emails",
+									"value": "viasizbro99@gmail.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate PL",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							},
+							{
+								"key": "X-File",
+								"value": "fileresponse",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/PLAccount",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"PLAccount"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2021-07-01",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "2021-07-30",
+									"disabled": true
+								},
+								{
+									"key": "emails",
+									"value": "viasizbro99@gmail.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Balance Sheet",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							},
+							{
+								"key": "X-File",
+								"value": "fileresponse",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/BalanceSheet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"BalanceSheet"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2021-07-01",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "2021-07-30",
+									"disabled": true
+								},
+								{
+									"key": "emails",
+									"value": "viasizbro99@gmail.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/Ledgers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/Ledgers/ee1c0dcd-c5fd-470e-b444-2a48bc092541",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"Ledgers",
+								"ee1c0dcd-c5fd-470e-b444-2a48bc092541"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/Ledgers Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/Ledgers/3ee1162f-9305-436d-8b19-d26b905ca174/Send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"Ledgers",
+								"3ee1162f-9305-436d-8b19-d26b905ca174",
+								"Send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/Ledgers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/Ledgers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"Ledgers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/Ledgers/Upsert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"LedgerName\": \"Pitty Cash\",\r\n    \"LedgerId\": \"9d017d14-554d-4663-87d6-ccffb5d69723\",\r\n    \"ParentId\":null,\r\n    \"LedgerHeadTypeId\":\"a8954cf2-822e-4763-b3a7-7a56d80db759\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/Ledgers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"Ledgers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/Ledgers/Link/Users?ledgername=aashish",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/Ledgers/Link/Users?ledgername=aashish pudasaini",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"Ledgers",
+								"Link",
+								"Users"
+							],
+							"query": [
+								{
+									"key": "ledgername",
+									"value": "aashish pudasaini"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:4000/JournalEntries/Upsert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Token",
+								"value": "eyJVc2VyTG9naW5JbmZvSWQiOiJmZjA0MzE5Yy1iNDE1LTQzNGEtODJlYS1iOTJhYzhiODYzM2MiLCJVc2VyUmVmZXJlbmNlIjoiNjQ1MjFkNWUtOTU3Yy00YzdmLTk5ZTEtMzdkM2YxZjNjZjE2IiwiVXNlcm5hbWUiOiJzYW1hc2l6d29ybGQiLCJUb2tlbkV4cGlyZXNJbiI6MzYwMH0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"LedgerName\": \"Pitty Cash\",\r\n        \"LedgerId\": \"9d017d14-554d-4663-87d6-ccffb5d69723\",\r\n        \"Fund\": 500,\r\n        \"IsCredit\": false,\r\n        \"IsDebit\": true\r\n    },\r\n    {\r\n        \"LedgerName\": \"Hatemalo\",\r\n        \"LedgerId\": \"7c81e90b-ac5c-4630-b4b1-60db0c9f74f8\",\r\n        \"IsDebit\": false,\r\n        \"IsCredit\": true,\r\n        \"Fund\": 500,\r\n        \"Description\": \"For Pitty Cash\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/JournalEntries/Upsert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"JournalEntries",
+								"Upsert"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

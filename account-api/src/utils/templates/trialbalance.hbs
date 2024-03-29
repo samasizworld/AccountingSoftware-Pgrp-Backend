@@ -1,0 +1,38 @@
+<html>
+<head>    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   <div>Trail Balance As of {{dateFormat}}</div>
+    <table class="table" >
+        
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">S.N.</th>
+            <th scope="col">LedgerHead</th>
+            <th scope="col">Debit</th>
+            <th scope="col">Credit</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each dtos as |item i|}}
+          <tr>
+            <th scope="row">{{asc i}}</th>
+            <td>{{LedgerName}}</td>
+            <td>{{IsDebit}}</td>
+            <td>{{IsCredit}}</td>
+          </tr>
+          {{/each}}
+        
+          <tr>
+            <th scope="row">Total</th>
+            <td></td>
+            <td>{{Dr}}</td>
+            <td>{{Cr}}</td>
+        </tr>
+        </tbody>
+      </table>
+      
+      
+</body>
+</html>

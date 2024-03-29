@@ -1,0 +1,15 @@
+#Rebuild the node project
+FROM node:18.16.1-alpine
+
+WORKDIR /usr/src/nodeapi
+COPY . .
+
+RUN npm install
+RUN npm install -g typescript@5.1.6
+RUN npm rebuild
+
+EXPOSE 3000
+
+RUN tsc
+
+CMD [ "npm", "start" ]

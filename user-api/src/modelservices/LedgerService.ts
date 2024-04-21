@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const LedgerService = {
     async AddLedger(token,name,userid) {
-        let url = `http://localhost:4000/Ledgers`;
+        let url = `http://p-accountapi:4000/Ledgers`;
         let data = { LedgerName: name, UserId: userid };
         // config
         let options = {

@@ -4,7 +4,7 @@ var sequelize: Sequelize;
 export const sequelizeConnect = (dbName: string) => {
     sequelize = new Sequelize(dbName, 'postgres', '1234', {
         dialect: "postgres",
-        host: "localhost",
+        host: "host.docker.internal",
         timezone: "Asia/Kathmandu",
         pool: {
             max: 5,

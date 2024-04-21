@@ -6,7 +6,7 @@ let password: "1234";
 export const sequelizeConnect = (dbName: string) => {
   sequelize = new Sequelize(dbName, 'postgres', '1234', {
     dialect: "postgres",
-    host: "localhost",
+    host: "host.docker.internal",
     timezone: "Asia/Kathmandu",
     pool: {
       max: 25,

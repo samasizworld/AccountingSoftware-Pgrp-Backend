@@ -10,6 +10,7 @@ let router = express.Router();
 let bodyParser = require("body-parser");
 let helmet = require("helmet");
 let featurePolicy = require('feature-policy')
+let cors = require('cors')
 const port = 3000;
 
 sequelizeConnect("user_db");
@@ -53,6 +54,10 @@ app.use(featurePolicy({
   },
 
 }))
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE"
+}));
 
 
 app.use(function customErrorHandler(err, req, res, next) {

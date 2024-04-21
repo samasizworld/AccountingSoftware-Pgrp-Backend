@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  userapi:
+    build:
+      context: ~/Downloads/pggroup-api-master/pggroup-api-master/user-api/
+    networks:
+      - pnetwork
+    ports:
+      - "3000:3000"
+    container_name: p-userapi
+    image: userimage
+    restart: unless-stopped
+    volumes:
+      - data:/usr/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Replace <your_host_ip> with your host machine's IP address
+
+  accountapi:
+    build:
+      context: ~/Downloads/pggroup-api-master/pggroup-api-master/account-api/
+    networks:
+      - pnetwork
+    ports:
+      - "4000:4000"
+    container_name: p-accountapi
+    image: accountimage
+    restart: unless-stopped
+    volumes:
+      - data:/usr/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Replace <your_host_ip> with your host machine's IP address
+
+  credentialapi:
+    build:
+      context: ~/Downloads/pggroup-api-master/pggroup-api-master/credential-api/
+    networks:
+      - pnetwork
+    ports:
+      - "5000:5000"
+    container_name: p-credentialapi
+    image: credentialimage
+    restart: unless-stopped
+    volumes:
+      - data:/usr/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Replace <your_host_ip> with your host machine's IP address
+
+volumes:
+  data:
+
+networks:
+  pnetwork:
+    external: true
+    name: pnetwork

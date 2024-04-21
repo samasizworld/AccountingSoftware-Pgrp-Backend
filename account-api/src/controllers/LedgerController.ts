@@ -39,13 +39,19 @@ export const LedgerController = {
             }
 
             whereClause.datedeleted = null;
-
+            let count;
             if (pagesize == 0) {
                 results = await ledger.findAll({
                     where: whereClause,
                     order: [[orderby, orderdirection]]
                 });
+                count = results.length;
             } else {
+                const r = await ledger.findAll({
+                    where: whereClause,
+                    order: [[orderby, orderdirection]]
+                });
+                count = r.length;
                 results = await ledger.findAll({
                     where: whereClause,
                     limit: pagesize,
@@ -54,21 +60,22 @@ export const LedgerController = {
                 });
             }
 
-            
-            let dtos = await Promise.all( results.map(async r => {
-                let parent:any;
-                if(r.parentid){
-                parent=await ledger.findOne({where:{ledgerheadid:r.parentid,datedeleted:null}});
+
+            let dtos = await Promise.all(results.map(async r => {
+                let parent: any;
+                if (r.parentid) {
+                    parent = await ledger.findOne({ where: { ledgerheadid: r.parentid, datedeleted: null } });
                 }
                 return {
                     LedgerId: r.guid,
                     LedgerName: r.name,
                     UserId: r.userreference,
-                    LedgerHeadType:r.ledgerheadtypeid?(await LedgerHeadTypes(sequelize).schema('account').findOne({where:{ledgerheadtypeid:r.ledgerheadtypeid,datedeleted:null}})as any).code:null,
-                    ParentName:r.parentid?parent.name:'',
+                    LedgerHeadType: r.ledgerheadtypeid ? (await LedgerHeadTypes(sequelize).schema('account').findOne({ where: { ledgerheadtypeid: r.ledgerheadtypeid, datedeleted: null } }) as any).code : null,
+                    ParentName: r.parentid ? parent.name : '',
                     DateCreated: moment(r.datecreated).tz("Asia/Kathmandu").format('YYYY-MM-DD HH:mm:ss')
                 }
             }))
+            res.header('x-count', count || 0)
             return res.status(200).send(dtos);
 
         } catch (error) {
@@ -87,36 +94,36 @@ export const LedgerController = {
             // if (!ledgersss) {
             //     return res.status(404).send({ message: 'No Resources Found' });
             // }
-            let [result]:any = await ledger.findAll({ where: { datedeleted: null, guid: legderId }, include: [{ association: 'transactions', where: { datedeleted: null } ,required:false}] });
-            async function ledgerDetailMapper(result){
-                let dto:any={};
-                dto.LedgerName=result.name;
-                dto.LedgerId=result.guid;
-                dto.UserId=result.userreference;
-                dto.DateCreated=moment(result.datecreated).format('MMMM Do,YYYY');
-                dto.Transactions=result.transactions.map(t=>{
-                    let d:any={};
-                    d.JournalEntryId=t.guid;
+            let [result]: any = await ledger.findAll({ where: { datedeleted: null, guid: legderId }, include: [{ association: 'transactions', where: { datedeleted: null }, required: false }] });
+            async function ledgerDetailMapper(result) {
+                let dto: any = {};
+                dto.LedgerName = result.name;
+                dto.LedgerId = result.guid;
+                dto.UserId = result.userreference;
+                dto.DateCreated = moment(result.datecreated).format('MMMM Do,YYYY');
+                dto.Transactions = result.transactions.map(t => {
+                    let d: any = {};
+                    d.JournalEntryId = t.guid;
                     // d.UserId=t.userreference;
-                    if(t.isdebit==true){
-                        d.IsDebit=t.moneytransaction;
+                    if (t.isdebit == true) {
+                        d.IsDebit = t.moneytransaction;
                     }
-                    if(t.iscredit==true){
-                        d.IsCredit=t.moneytransaction;
+                    if (t.iscredit == true) {
+                        d.IsCredit = t.moneytransaction;
                     }
                     // d.Fine=t.fine?t.fine:0;
-                    d.Description=t.description;
-                    d.DateCreated=moment(t.datecreated).format('YYYY-MM-DD');
+                    d.Description = t.description;
+                    d.DateCreated = moment(t.datecreated).format('YYYY-MM-DD');
                     return d;
                 });
                 return dto;
             };
-            
-            let dto=await ledgerDetailMapper(result); 
-            const Dr=dto.Transactions.map(t=>t.IsDebit).filter(t=>t!=undefined).reduce((prev,cur)=>prev+cur,0);
-            const Cr=dto.Transactions.map(t=>t.IsCredit).filter(t=>t!=undefined).reduce((prev,cur)=>prev+cur,0);
-            const Diff=Math.abs(Dr-Cr);
-            await ledger.update({amount:Diff},{where:{guid:dto.LedgerId,datedeleted:null},returning:true});
+
+            let dto = await ledgerDetailMapper(result);
+            const Dr = dto.Transactions.map(t => t.IsDebit).filter(t => t != undefined).reduce((prev, cur) => prev + cur, 0);
+            const Cr = dto.Transactions.map(t => t.IsCredit).filter(t => t != undefined).reduce((prev, cur) => prev + cur, 0);
+            const Diff = Math.abs(Dr - Cr);
+            await ledger.update({ amount: Diff }, { where: { guid: dto.LedgerId, datedeleted: null }, returning: true });
             return res.status(200).send(dto);
 
         } catch (error) {
@@ -129,50 +136,50 @@ export const LedgerController = {
         let ledgerData = req.body;
         let sequelize = ConnectToPostgres();
         let ledger = Ledger(sequelize).schema('account');
-        const ledgerheadtype=LedgerHeadTypes(sequelize).schema('account');
+        const ledgerheadtype = LedgerHeadTypes(sequelize).schema('account');
         try {
             if (ledgerData && !ledgerData.LedgerName) {
                 return res.status(400).send({ message: 'Invalid Body Request' });
             }
-            const { LedgerId, LedgerName, UserId,ParentId,LedgerHeadTypeId} = ledgerData;
-            const ledgertype:any=await ledgerheadtype.findOne({where:{guid:LedgerHeadTypeId,datedeleted:null}});
+            const { LedgerId, LedgerName, UserId, ParentId, LedgerHeadTypeId } = ledgerData;
+            const ledgertype: any = await ledgerheadtype.findOne({ where: { guid: LedgerHeadTypeId, datedeleted: null } });
             let model: any = {
                 guid: UtilityObject.isGuid(LedgerId) == false ? uuid.v4() : LedgerId,
                 name: LedgerName,
                 userreference: UserId,
-                parentid:ParentId,
-                ledgerheadtypeid:ledgertype.ledgerheadtypeid
+                parentid: ParentId,
+                ledgerheadtypeid: ledgertype.ledgerheadtypeid
             };
 
             let result: any;
-            let parentLedger:any;
-            if(model.parentid){
-                parentLedger=await ledger.findOne({where:{guid:model.parentid,datedeleted:null}});
-                model.parentid=parentLedger.ledgerheadid;
-            }else{
-                model.parentid=null;
+            let parentLedger: any;
+            if (model.parentid) {
+                parentLedger = await ledger.findOne({ where: { guid: model.parentid, datedeleted: null } });
+                model.parentid = parentLedger.ledgerheadid;
+            } else {
+                model.parentid = null;
             };
             let isLedgerExists = await ledger.findOne({ where: { guid: model.guid, datedeleted: null } });
             // name validation here
-            let ledgerNames:any=await ledger.findAll({where:{datedeleted:null}});
+            let ledgerNames: any = await ledger.findAll({ where: { datedeleted: null } });
 
-            ledgerNames=ledgerNames.map(l=>l.name.replace(/\s/g,'').toLowerCase());
-            
-                
-            if(isLedgerExists){
+            ledgerNames = ledgerNames.map(l => l.name.replace(/\s/g, '').toLowerCase());
 
-                const existedName=isLedgerExists.name.replace(/\s/g,'').toLowerCase();
-                ledgerNames=ledgerNames.filter(l=>l!=existedName);
-            
+
+            if (isLedgerExists) {
+
+                const existedName = isLedgerExists.name.replace(/\s/g, '').toLowerCase();
+                ledgerNames = ledgerNames.filter(l => l != existedName);
+
             }
-            if(ledgerNames.includes(model.name.replace(/\s/g,'').toLowerCase())){
-                return res.status(400).send({message:'Record Already Exists'})
+            if (ledgerNames.includes(model.name.replace(/\s/g, '').toLowerCase())) {
+                return res.status(400).send({ message: 'Record Already Exists' })
             }
             // end here
             // if(ParentId){
             //     await ledger.update({parentid:ParentId},{where:{datedeleted:null,guid:model.guid}});
             // }
-           
+
             if (isLedgerExists) {
                 // let users = await UserService.GetUsers(model.name.split(' ')[0] || model.name.split(" ")[1]);
                 // model.userreference = users && users.length == 0 ? null : users[0].UserId;
@@ -181,8 +188,8 @@ export const LedgerController = {
 
             }
             else {
-                    result = await ledger.create(model);
-                
+                result = await ledger.create(model);
+
             }
             return res.status(201).send({ LedgerId: result.guid });
 
@@ -194,7 +201,7 @@ export const LedgerController = {
     sendLedger: async (req, res) => {
         let sequelize = ConnectToPostgres();
         let ledger = Ledger(sequelize).schema('account');
-        const token=req.get('X-Token');
+        const token = req.get('X-Token');
         let legderId = req.params.ledgerid;
         ledger.hasMany(JournalEntry(sequelize).schema('account'), { as: 'transactions', foreignKey: 'ledgerheadid' });
         try {
@@ -202,53 +209,53 @@ export const LedgerController = {
             // if (!ledgersss) {
             //     return res.status(404).send({ message: 'No Resources Found' });
             // }
-            let [result]:any = await ledger.findAll({ where: { datedeleted: null, guid: legderId }, include: [{ association: 'transactions', where: { datedeleted: null } ,required:true}] });
-            async function ledgerDetailMapper(result){
-                let dto:any={};
-                dto.LedgerName=result.name;
-                dto.LedgerId=result.guid;
-                dto.UserId=result.userreference;
-                dto.DateCreated=moment(result.datecreated).format('MMMM Do,YYYY');
-                dto.Transactions=result.transactions.map(t=>{
-                    let d:any={};
-                    d.JournalEntryId=t.guid;
+            let [result]: any = await ledger.findAll({ where: { datedeleted: null, guid: legderId }, include: [{ association: 'transactions', where: { datedeleted: null }, required: true }] });
+            async function ledgerDetailMapper(result) {
+                let dto: any = {};
+                dto.LedgerName = result.name;
+                dto.LedgerId = result.guid;
+                dto.UserId = result.userreference;
+                dto.DateCreated = moment(result.datecreated).format('MMMM Do,YYYY');
+                dto.Transactions = result.transactions.map(t => {
+                    let d: any = {};
+                    d.JournalEntryId = t.guid;
                     // d.UserId=t.userreference;
-                    if(t.isdebit==true){
-                        d.IsDebit=t.moneytransaction;
+                    if (t.isdebit == true) {
+                        d.IsDebit = t.moneytransaction;
                     }
-                    if(t.iscredit==true){
-                        d.IsCredit=t.moneytransaction;
+                    if (t.iscredit == true) {
+                        d.IsCredit = t.moneytransaction;
                     }
                     // d.Fine=t.fine?t.fine:0;
-                    d.Description=t.description;
-                    d.DateCreated=moment(t.datecreated).format('YYYY-MM-DD');
+                    d.Description = t.description;
+                    d.DateCreated = moment(t.datecreated).format('YYYY-MM-DD');
                     return d;
                 });
                 return dto;
             };
-            let dto=await ledgerDetailMapper(result);
-            const Dr=dto.Transactions.map(t=>t.IsDebit).filter(t=>t!=undefined).reduce((a,b)=>a+b,0);
-            const Cr=dto.Transactions.map(t=>t.IsCredit).filter(t=>t!=undefined).reduce((a,b)=>a+b,0);
-            const diff=Dr-Cr;
-            let creditBalance:any;
-            let debitBalance:any;
-            if(diff<0){
-                 creditBalance=Math.abs(diff);
-            }else{
-                 debitBalance=Math.abs(diff);
+            let dto = await ledgerDetailMapper(result);
+            const Dr = dto.Transactions.map(t => t.IsDebit).filter(t => t != undefined).reduce((a, b) => a + b, 0);
+            const Cr = dto.Transactions.map(t => t.IsCredit).filter(t => t != undefined).reduce((a, b) => a + b, 0);
+            const diff = Dr - Cr;
+            let creditBalance: any;
+            let debitBalance: any;
+            if (diff < 0) {
+                creditBalance = Math.abs(diff);
+            } else {
+                debitBalance = Math.abs(diff);
             }
-            if(creditBalance){
-                dto={...dto,Cr,Dr,creditBalance};
-            }else{
-                dto={...dto,Cr,Dr,debitBalance}
+            if (creditBalance) {
+                dto = { ...dto, Cr, Dr, creditBalance };
+            } else {
+                dto = { ...dto, Cr, Dr, debitBalance }
             }
-            const template = await compileTemplate('ledgertable',dto);
-            const pdf=await pdfGenerateByHtml(template);
-            if(dto.LedgerName!='Bank'||dto.LedgerName!='Fine'||dto.LedgerName!='Interest'){
+            const template = await compileTemplate('ledgertable', dto);
+            const pdf = await pdfGenerateByHtml(template);
+            if (dto.LedgerName != 'Bank' || dto.LedgerName != 'Fine' || dto.LedgerName != 'Interest') {
                 // const user:any= await UserService.GetUser(token,dto.UserId);
                 // await emailSender.emailSender(user.EmailAddress,pdf);
-            } 
-            return res.status(200).send({message:'Email Sent'});
+            }
+            return res.status(200).send({ message: 'Email Sent' });
 
         } catch (error) {
             logError(error.message, error.stack, 'GETLedger', req.UserReference);

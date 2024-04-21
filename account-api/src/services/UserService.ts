@@ -4,7 +4,7 @@ export const UserService = {
         let options = {
             headers: { "Content-Type": "application/json" ,"X-Token":token}
         };
-        let url = `http://localhost:3000/User?pageSize=0`;
+        let url = `http://p-userapi:3000/User?pageSize=0`;
         try {
             let res = await axios.get(url, options);
             return res.data;
@@ -17,7 +17,7 @@ export const UserService = {
         let options = {
             headers: { "Content-Type": "application/json" ,"X-Token":token}
         };
-        let url = `http://localhost:3000/User/${userId}`;
+        let url = `http://p-userapi:3000/User/${userId}`;
         try {
             let res = await axios.get(url, options);
             return res.data;

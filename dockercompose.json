@@ -3,10 +3,10 @@
     "services": {
         "userapi": {
             "build": {
-                "context": "~/Desktop/PgrpServer/user-api/"
+                "context": "~/Downloads/pggroup-api-master/pggroup-api-master/user-api/"
             },
             "networks": [
-                "default"
+                "host"
             ],
             "ports": [
                 "3000:3000"
@@ -20,10 +20,10 @@
         },
         "accountapi": {
             "build": {
-                "context": "~/Desktop/PgrpServer/account-api/"
+                "context": "~/Downloads/pggroup-api-master/pggroup-api-master/account-api/"
             },
             "networks": [
-                "default"
+                "host"
             ],
             "ports": [
                 "4000:4000"
@@ -37,10 +37,10 @@
         },
         "credentialapi": {
             "build": {
-                "context": "~/Desktop/PgrpServer/credential-api/"
+                "context": "~/Downloads/pggroup-api-master/pggroup-api-master/credential-api/"
             },
             "networks": [
-                "default"
+                "host"
             ],
             "ports": [
                 "5000:5000"
@@ -57,9 +57,9 @@
         "data": {}
     },
     "networks": {
-        "default": {
+        "host": {
             "external": true,
-            "name": "pnetwork"
+            "name": "host"
         }
     }
 }

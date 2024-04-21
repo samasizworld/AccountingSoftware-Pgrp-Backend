@@ -13,6 +13,8 @@ let router = express.Router();
 let bodyParser = require("body-parser");
 let helmet = require("helmet");
 let featurePolicy = require('feature-policy')
+let cors=require('cors');
+
 const port = 4000;
 
 sequelizeConnect("account_db");
@@ -57,11 +59,16 @@ app.use(featurePolicy({
 
 }))
 
+app.use(cors({
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE"
+}));
 
 app.use(function customErrorHandler(err, req, res, next) {
     console.log("customErrorHandler...Error" + err);
     res.status(400).send({ message: "Not allowed!" });
 });
+
 
 
 app.use("/", router);

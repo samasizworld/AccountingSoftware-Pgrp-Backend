@@ -3,7 +3,7 @@ let sequelize: any;
 export const sequelizeConnect = (dbName: string) => {
     sequelize = new Sequelize(dbName, 'postgres', '1234', {
         dialect: "postgres",
-        host: "localhost",
+        host: "host.docker.internal",
         timezone: "Asia/Kathmandu",
         pool: {
             max: 5, // for one sequelize instance has 5 max pool connection size
